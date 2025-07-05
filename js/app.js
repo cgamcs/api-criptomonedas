@@ -64,5 +64,18 @@ function submitFormulario(e) {
 }
 
 function mostrarAlerta(mensaje) {
+    const existeAlerta = document.querySelector('.error')
 
+    if(!existeAlerta) {
+        const alerta = document.createElement('P')
+        alerta.classList.add('error')
+
+        alerta.textContent = mensaje
+
+        formulario.appendChild(alerta)
+
+        setTimeout(() => {
+            alerta.remove()
+        }, 3000);
+    }
 }
