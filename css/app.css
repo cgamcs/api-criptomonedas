@@ -39,10 +39,12 @@ input[type="submit"]{
     height: auto;
 }
 .error {
-    background-color: #b7322c;
+    background-color: #e0aba8;
+    border: 1px solid #d42727;
+    border-radius: 5px;
     padding: 1rem;
-    color: white;
-    font-size: 18px;
+    color: #d42727;
+    font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
