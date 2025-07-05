@@ -61,6 +61,9 @@ function submitFormulario(e) {
         mostrarAlerta('Ambos campos son necesarios')
         return
     }
+
+    // Consultar el valor de la criptomoneda
+    consultarAPI()
 }
 
 function mostrarAlerta(mensaje) {
@@ -78,4 +81,17 @@ function mostrarAlerta(mensaje) {
             alerta.remove()
         }, 3000);
     }
+}
+
+function consultarAPI() {
+    const { moneda, criptomoneda } = objtBusqueda
+    const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
+
+    fetch(url)
+        .then(res => res.json())
+        .then(res => mostrarCotizacion(res.DISPLAY[criptomoneda][moneda]))
+}
+
+function mostrarCotizacion(res) {
+    console.log(res)
 }
