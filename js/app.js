@@ -58,7 +58,7 @@ function submitFormulario(e) {
     // Validar
     const { moneda, criptomoneda } = objtBusqueda
 
-    if(moneda === '' || criptomoneda === '') {
+    if (moneda === '' || criptomoneda === '') {
         mostrarAlerta('Ambos campos son necesarios')
         return
     }
@@ -70,7 +70,7 @@ function submitFormulario(e) {
 function mostrarAlerta(mensaje) {
     const existeAlerta = document.querySelector('.error')
 
-    if(!existeAlerta) {
+    if (!existeAlerta) {
         const alerta = document.createElement('P')
         alerta.classList.add('error')
 
@@ -88,6 +88,8 @@ function consultarAPI() {
     const { moneda, criptomoneda } = objtBusqueda
     const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`
 
+    mostrarSpinner()
+
     fetch(url)
         .then(res => res.json())
         .then(res => mostrarCotizacion(res.DISPLAY[criptomoneda][moneda]))
@@ -97,7 +99,7 @@ function mostrarCotizacion(cotizacion) {
     limpiarHTML()
 
     const { PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE } = cotizacion
-    
+
     const precio = document.createElement('P')
     precio.classList.add('precio')
     precio.innerHTML = `El precio es de: <span>${PRICE}</span>`
@@ -119,12 +121,33 @@ function mostrarCotizacion(cotizacion) {
     resultado.appendChild(precioBajo)
     resultado.appendChild(ultimasHoras)
     resultado.appendChild(ultimaActualizacion)
+}
 
-    resultado.las
+function mostrarSpinner() {
+    limpiarHTML()
+
+    const spinner = document.createElement('DIV')
+    spinner.classList.add('sk-fading-circle')
+    spinner.innerHTML = `
+        <div class="sk-circle1 sk-circle"></div>
+        <div class="sk-circle2 sk-circle"></div>
+        <div class="sk-circle3 sk-circle"></div>
+        <div class="sk-circle4 sk-circle"></div>
+        <div class="sk-circle5 sk-circle"></div>
+        <div class="sk-circle6 sk-circle"></div>
+        <div class="sk-circle7 sk-circle"></div>
+        <div class="sk-circle8 sk-circle"></div>
+        <div class="sk-circle9 sk-circle"></div>
+        <div class="sk-circle10 sk-circle"></div>
+        <div class="sk-circle11 sk-circle"></div>
+        <div class="sk-circle12 sk-circle"></div>
+    `
+
+    resultado.appendChild(spinner)
 }
 
 function limpiarHTML() {
-    while(resultado.firstChild) {
+    while (resultado.firstChild) {
         resultado.removeChild(resultado.firstChild)
     }
 }
